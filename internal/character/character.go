@@ -46,16 +46,15 @@ func FetchCharacters(username string) ([]Character, error) {
 // GetCharactersInLeagues filters a character slice by league name.
 // It returns a slice of characters that belong to at least one league in `leagues`.
 func GetCharactersInLeagues(characters []Character, leagues []league.League) []Character {
-	n := 0
+	charactersInLeagues := []Character{}
 
 	for _, character := range characters {
 		for _, league := range leagues {
 			if character.League == league.ID {
-				characters[n] = character
-				n++
+				charactersInLeagues = append(charactersInLeagues, character)
 				break
 			}
 		}
 	}
-	return characters[:n]
+	return charactersInLeagues
 }
